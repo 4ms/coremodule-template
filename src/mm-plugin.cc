@@ -1,5 +1,8 @@
 #include "CoreModules/register_module.hh"
+#include "core/MYMODULE.hh"
 
-__attribute__((__visibility__("default"))) void init() {
-	MetaModule::register_module<SimpleGain>("NativeExample", "SimpleGain", info, "NativeExample/simple_gain.png");
+extern "C" __attribute__((__visibility__("default"))) void init() {
+	using namespace MetaModule;
+
+	register_module<MYMODULECore, MYMODULEInfo>("MyPlugin");
 }

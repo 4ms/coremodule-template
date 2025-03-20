@@ -1,17 +1,16 @@
 #include "CoreModules/CoreProcessor.hh"
-#include "CoreModules/moduleFactory.hh"
-#include "info/Atvert2_info.hh"
+#include "info/MYMODULE_info.hh"
 #include "util/math.hh"
 
 namespace MetaModule
 {
 
-class Atvert2Core : public CoreProcessor {
-	using Info = Atvert2Info;
-	using ThisCore = Atvert2Core;
+class MYMODULECore : public CoreProcessor {
+	using Info = MYMODULEInfo;
+	using ThisCore = MYMODULECore;
 
 public:
-	Atvert2Core() = default;
+	MYMODULECore() = default;
 
 	void update(void) override {
 		out1 = (in1Connected ? in1 : defaultVoltage) * level1;
@@ -20,25 +19,28 @@ public:
 
 	void set_param(int param_id, float val) override {
 		float bipolarKnob = MathTools::map_value(val, 0.0f, 1.0f, -1.0f, 1.0f);
+
 		switch (param_id) {
-			case Info::Knob_1:
+			case Info::LevelKnob_1:
 				level1 = bipolarKnob;
 				break;
-			case Info::Knob_2:
+			case Info::LevelKnob_2:
 				level2 = bipolarKnob;
 				break;
 		}
 	}
 
-	void set_samplerate(const float sr) override {
+	void set_samplerate(float sr) override {
 	}
 
 	void set_input(int input_id, float val) override {
 		switch (input_id) {
-			case Info::InputIn_1:
+
+			case Info::Input_1:
 				in1 = val;
 				break;
-			case Info::InputIn_2:
+
+			case Info::Input_2:
 				in2 = val;
 				break;
 		}
@@ -46,12 +48,15 @@ public:
 
 	float get_output(int output_id) const override {
 		switch (output_id) {
-			case Info::OutputOut_1:
+
+			case Info::Output_1:
 				return out1;
 				break;
-			case Info::OutputOut_2:
+
+			case Info::Output_2:
 				return out2;
 				break;
+
 			default:
 				return 0;
 				break;
@@ -59,24 +64,18 @@ public:
 	}
 
 	void mark_input_unpatched(int input_id) override {
-		if (input_id == Info::InputIn_1)
+		if (input_id == Info::Input_1)
 			in1Connected = false;
-		else if (input_id == Info::InputIn_2)
+		else if (input_id == Info::Input_2)
 			in2Connected = false;
 	}
 
 	void mark_input_patched(int input_id) override {
-		if (input_id == Info::InputIn_1)
+		if (input_id == Info::Input_1)
 			in1Connected = true;
-		else if (input_id == Info::InputIn_2)
+		else if (input_id == Info::Input_2)
 			in2Connected = true;
 	}
-
-	// Boilerplate to auto-register in ModuleFactory
-	// clang-format off
-	static std::unique_ptr<CoreProcessor> create() { return std::make_unique<ThisCore>(); }
-	static inline bool s_registered = ModuleFactory::registerModuleType(Info::slug, create, ModuleInfoView::makeView<Info>(), Info::png_filename);
-	// clang-format on
 
 private:
 	float in1 = 0;
