@@ -116,4 +116,39 @@ ls -l build/metamodule-plugins-v2/
     -rw-r--r--  1 user  group  26600 Mar 20 11:49 MyPlugin.mmplugin
 ```
 
+## Creating an info file
+
+The `info` file is a header file that contains a description of all the elements in a module (jacks, knobs, switches, etc).
+It also provides the module slug, faceplate location, and bypass routes.
+
+By convention, info headers are named `Slug_info.hh` where Slug is the module slug.
+
+In this repo, the info file(s) are in `src/modules/info/`
+
+While you can write this by hand, getting the XY positions to match the artwork file is tedious. So, there's a script that
+does this automatically.
+
+First, create an SVG file for your modules.
+
+Create two layers (Illustrator) or "groups" (Inkscape). One is named "components" and the other is named "faceplate".
+
+Draw all artwork in the "faceplate" layer. If you use fonts, convert them to outlines.
+
+In the components layer, make various shapes to indicate the location and type of each kind of element.
+
+Read the file `SPECS.md` found in `scripts/svgextract` for instructions on how to to do that.
+
+Very important is to read the part about the slug and modulename text objects.
+You must have two text objects (not converted to outlines) on the components
+layer (don't worry, they won't show up on your artwork!). The slug object is the module slug,
+and the modulename object is a longer description.
+
+When you have the SVG file, run the svgextract python script on it to create an info file:
+
+```
+python3 scripts/svgextract/svgextract.py createinfo src/modules/svg/MyModule_info.svg src/modules/info/
+
+```
+
+This will create a file named `MyModule_info.hh` in src/modules/info
 
