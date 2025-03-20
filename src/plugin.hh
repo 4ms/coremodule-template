@@ -3,4 +3,4 @@
 
 extern rack::Plugin *pluginInstance;
 
-extern rack::Model *modelMYMODULE;
+extern rack::Model *modelMyModule;
