@@ -1,33 +1,34 @@
 #include "CoreModules/CoreProcessor.hh"
-#include "info/MYMODULE_info.hh"
-#include "util/math.hh"
+#include "info/MyModule_info.hh"
 
 namespace MetaModule
 {
 
-class MYMODULECore : public CoreProcessor {
-	using Info = MYMODULEInfo;
+class MyModuleCore : public CoreProcessor {
+	using Info = MyModuleInfo;
 
 public:
-	MYMODULECore() = default;
+	MyModuleCore() = default;
 
 	void update(void) override {
-		out1 = (in1Connected ? in1 : defaultVoltage) * level1;
-		out2 = (in2Connected ? in2 : defaultVoltage) * level2;
+		// set outputs based on inputs and parameters
+
+		out = 1.f;
+		outL = 2.f;
+		outR = 2.f;
 	}
 
 	void set_param(int param_id, float val) override {
-		float bipolarKnob = MathTools::map_value(val, 0.0f, 1.0f, -1.0f, 1.0f);
 
 		switch (param_id) {
 
-			case Info::LevelKnob_1:
-				level1 = bipolarKnob;
+			case Info::KnobAttack:
 				break;
 
-			case Info::LevelKnob_2:
-				level2 = bipolarKnob;
+			case Info::KnobDecay:
 				break;
+
+				//etc
 		}
 	}
 
@@ -37,59 +38,45 @@ public:
 	void set_input(int input_id, float val) override {
 		switch (input_id) {
 
-			case Info::Input_1:
-				in1 = val;
+			case Info::InputAttackcv:
 				break;
 
-			case Info::Input_2:
-				in2 = val;
+			case Info::InputWavecv:
 				break;
+
+				//etc
 		}
 	}
 
 	float get_output(int output_id) const override {
 		switch (output_id) {
 
-			case Info::Output_1:
-				return out1;
+			case Info::OutputOut:
+				return out;
 				break;
 
-			case Info::Output_2:
-				return out2;
+			case Info::OutputLout:
+				return outL;
 				break;
 
-			default:
-				return 0;
+			case Info::OutputRout:
+				return outR;
 				break;
 		}
+
+		return 0;
 	}
 
 	void mark_input_unpatched(int input_id) override {
-		if (input_id == Info::Input_1)
-			in1Connected = false;
-		else if (input_id == Info::Input_2)
-			in2Connected = false;
 	}
 
 	void mark_input_patched(int input_id) override {
-		if (input_id == Info::Input_1)
-			in1Connected = true;
-		else if (input_id == Info::Input_2)
-			in2Connected = true;
 	}
 
 private:
-	float in1 = 0;
-	float in2 = 0;
-	float out1 = 0;
-	float out2 = 0;
-	float level1 = 0;
-	float level2 = 0;
-
-	bool in1Connected = false;
-	bool in2Connected = false;
-
-	static constexpr float defaultVoltage = 5.f;
+	float out = 0;
+	float outL = 0;
+	float outR = 0;
 };
 
 } // namespace MetaModule
