@@ -1,14 +1,15 @@
+#pragma once
 #include "CoreModules/CoreProcessor.hh"
 #include "info/MyModule_info.hh"
 
 namespace MetaModule
 {
 
-class MyModuleCore : public CoreProcessor {
+class MyModule : public CoreProcessor {
 	using Info = MyModuleInfo;
 
 public:
-	MyModuleCore() = default;
+	MyModule() = default;
 
 	void update(void) override {
 		// set outputs based on inputs and parameters
