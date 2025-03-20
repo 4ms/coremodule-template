@@ -1,17 +1,21 @@
 RACK_DIR ?= ../..
-METAMODULE_SDK_DIR ?= ../metamodule-plugin-sdk
+METAMODULE_SDK_DIR ?= metamodule-plugin-sdk
 
 SOURCES =
-SOURCES += $(wildcard src/modules/core/*.cc)
-SOURCES += $(wildcard src/modules/core/*.cpp)
-
 SOURCES += $(wildcard src/vcv/modules/*.cc)
 SOURCES += src/vcv/comm_module.cc
 SOURCES += src/plugin.cc
 
+INCLUDES = -Isrc \
+		   -Isrc/modules \
+		   -I$(METAMODULE_SDK_DIR)/metamodule-core-interface \
+		   -I$(METAMODULE_SDK_DIR)/cpputil
+
+FLAGS += $(INCLUDES) -std=c++20
+
 DISTRIBUTABLES += $(wildcard LICENSE*) res
 
-MMBUILD_DIR = build-mm
+MMBUILD_DIR = build
 
 mm: metamodule
 

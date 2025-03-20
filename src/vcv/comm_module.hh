@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreModules/CoreProcessor.hh"
-#include "comm/comm_jack.hh"
+#include "comm_jack.hh"
 
 // CommModule wraps CoreProcessors for use in VCV Rack
 

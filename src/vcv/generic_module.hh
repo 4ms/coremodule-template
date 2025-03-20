@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreModules/elements/element_counter.hh"
-#include "CoreModules/moduleFactory.hh"
-#include "comm/comm_module.hh"
+#include "comm_module.hh"
 #include "util/base_concepts.hh"
 #include "widgets/vcv_module_creator.hh"
 #include "widgets/vcv_widget_creator.hh"
 
-template<Derived<MetaModule::ModuleInfoBase> Info>
+template<Derived<MetaModule::ModuleInfoBase> Info, Derived<CoreProcessor> Core>
+
 struct GenericModule {
 	static rack::Model *create() {
 		return rack::createModel<Module, Widget>(Info::slug.data());
@@ -15,7 +15,7 @@ struct GenericModule {
 	struct Module : CommModule {
 		Module() {
 			// Create processing core
-			core = MetaModule::ModuleFactory::create(Info::slug);
+			core = std::make_unique<Core>();
 
 			// Register with VCV the number of elements of each type
 			auto cnt = ElementCount::count<Info>();

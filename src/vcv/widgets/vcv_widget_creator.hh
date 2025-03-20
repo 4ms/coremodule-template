@@ -3,7 +3,6 @@
 #include "CoreModules/elements/element_counter.hh"
 #include "CoreModules/elements/elements.hh"
 #include "alt_params_implementation.h"
-#include "console/pr_dbg.hh"
 #include "vcv_creation_context.hh"
 
 namespace MetaModule::VCVImplementation::Widget
@@ -12,11 +11,11 @@ namespace MetaModule::VCVImplementation::Widget
 inline void do_create(BaseElement element, const ElementCount::Indices &, const WidgetContext_t &) {
 	// Default: do nothing
 	// FIXME: Maybe this should be replaced with more specific fallbacks
-	pr_dbg("Creating of element '%.*s' not defined\n", int(element.short_name.size()), element.short_name.data());
+	printf("Creating of element '%.*s' not defined\n", int(element.short_name.size()), element.short_name.data());
 }
 
 inline void do_render_to_menu(BaseElement element, rack::ui::Menu *menu, Indices &, const WidgetContext_t &) {
-	pr_dbg("Rendering to context menu not defined for element '%.*s'\n",
+	printf("Rendering to context menu not defined for element '%.*s'\n",
 		   int(element.short_name.size()),
 		   element.short_name.data());
 }

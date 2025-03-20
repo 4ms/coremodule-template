@@ -1,5 +1,7 @@
-#include "CoreModules/4ms/info/MYMODULE_info.hh"
-#include "generic_module.hh"
+#include "core/MYMODULE.hh"
+#include "info/MYMODULE_info.hh"
+#include "vcv/generic_module.hh"
+
 using namespace MetaModule;
 
-rack::Model *modelAtvert2 = GenericModule<MYMODULEInfo>::create();
+rack::Model *modelMYMODULE = GenericModule<MYMODULEInfo, MYMODULECore>::create();

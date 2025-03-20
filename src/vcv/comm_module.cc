@@ -1,4 +1,4 @@
-#include "comm/comm_module.hh"
+#include "comm_module.hh"
 
 void CommModule::onSampleRateChange() {
 	sampleRateChanged = true;
