@@ -81,7 +81,9 @@ svgextract python script (see below). These SVG files live in
 When you add a new module, you'll also need to add it to the init() functions in plugin-vcv.cc and plugin-mm.cc.
 Copy the examples, and make sure to `#include` the core .hh file.
 
-The final place you need to edit to add a new module is in plugin.json and plugin-mm.json.
+You alos need to edit to add a new module is in plugin.json and plugin-mm.json.
+
+And finally, the faceplate and component artwork needs to be present for both projects.
 
 In summary, here are all the places where a new module needs to be added:
 - Create `src/modules/core/NewModule.cc` to define your module's core
@@ -91,6 +93,9 @@ In summary, here are all the places where a new module needs to be added:
 - Add an `#include`, a `GenericModule<...>::create()` and a `p->addModel();` to `src/plugin-vcv.cc`
 - Add an entry to plugin.json
 - Add an entry to plugin-mm.json
+- Create the VCV artwork SVG in `res/`
+- Create the MetaModule artwork PNG in `assets/` (typically using SvgToPng, see Artwork section below).
+- Go back and modify the `_info.hh` file to set the exact names and paths for the faceplate SVG and PNG files.
 
 
 ## Using a different MetaModule SDK
@@ -184,6 +189,8 @@ The script can't know how you organize these files, so you have to do this manua
 svg_filename is the VCV rack panel artwork. This will be something like `res/panel.svg`. 
 
 png_filename is the MetaModule artwork. This must start with your brand slug, that is, the plugin name (`MyPlugin/panel.svg`).
+Keep in mind that when the plugin is loaded into MetaModule, it will unpack everything in assets/ into a directory with the name
+of your brand slug. So if you have a file called `assets/knobs/ABCD.png` then it will be preset at `MyBrandSlug/knobs/ABCD.png`.
 
 
 ### Generating artwork
@@ -194,4 +201,10 @@ metamodule-plugin-sdk/scripts/SvgToPng.py --input res/ --output assets/
 ```
 
 And repeat that command for any subdirs you have in res/ (you need to create the subdir in assets/ as well)
+
+
+### Using custom knobs, jacks, buttons, etc.
+
+TODO
+
 
