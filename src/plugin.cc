@@ -6,4 +6,5 @@ __attribute__((__visibility__("default"))) void init(rack::Plugin *p) {
 	pluginInstance = p;
 
 	p->addModel(modelMyModule);
+	p->addModel(modelMyModule2);
 }

@@ -10,6 +10,10 @@
     {
       "slug": "MyModule",
       "name": "Test Module Number One"
+    },
+    {
+      "slug": "MyModule2",
+      "name": "Test Module Number Two"
     }
   ]
 }

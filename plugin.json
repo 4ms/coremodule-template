@@ -11,6 +11,13 @@
       "description": "Test module",
       "tags": [
       ]
+    },
+    {
+      "slug": "MyModule2",
+      "name": "My Module Two",
+      "description": "Test module 2",
+      "tags": [
+      ]
     }
   ]
 }
