@@ -1,0 +1,15 @@
+{
+  "MetaModuleBrandName": "My Plugin",
+  "MetaModuleBrandSlug": "MyPlugin",
+  "MetaModulePluginMaintainer": "My Name",
+  "MetaModulePluginMaintainerEmail": "me@example.com",
+  "MetaModulePluginMaintainerUrl": "https://example.com/modules",
+  "MetaModuleDescription": "A brief description of the plugin. If ported from another work, mention that here.",
+  "MetaModuleIncludedModules":
+  [
+    {
+      "slug": "MYMODULE",
+      "name": "Test Module Number One"
+    }
+  ]
+}

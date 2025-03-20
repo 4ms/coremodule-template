@@ -1,0 +1,17 @@
+{
+  "slug": "MyPlugin",
+  "version": "2.0.0",
+  "license": "GPL-3.0-or-later",
+  "name": "MyPlugin",
+  "brand": "MyPlugin",
+  "modules": [
+    {
+      "slug": "MYMODULE",
+      "name": "MyModule",
+      "description": "Test module",
+      "tags": [
+      ]
+    }
+  ]
+}
+
