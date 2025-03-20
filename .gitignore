@@ -1,3 +1,7 @@
-build/src
 dist
+dep
 plugin.dylib
+build-mm/
+build/
+metamodule-plugins/
+*.mmplugin

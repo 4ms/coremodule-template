@@ -19,16 +19,22 @@ MMBUILD_DIR = build
 
 mm: metamodule
 
-$(MMBUILD_DIR):
-	@mkdir -p $(MMBUILD_DIR)
-
-config: $(MMBUILD_DIR)
+$(MMBUILD_DIR)/CMakeCache.txt:
 	cmake --fresh -B $(MMBUILD_DIR) -G Ninja -DMETAMODULE_SDK_DIR=$(METAMODULE_SDK_DIR)
 
-metamodule: $(MMBUILD_DIR)
+config: $(MMBUILD_DIR)/CMakeCache.txt
+		
+metamodule: $(MMBUILD_DIR)/CMakeCache.txt
 	cmake --build $(MMBUILD_DIR)
 	
 
-.PHONY: mm metamodule config
+clean-mm:
+	rm -rf metamodule-plugins
+
+.PHONY: mm metamodule config clean-mm
+
+all: metamodule
+
+clean: clean-mm
 
 include $(RACK_DIR)/plugin.mk

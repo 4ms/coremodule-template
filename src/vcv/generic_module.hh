@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreModules/elements/element_counter.hh"
+#include "CoreModules/elements/element_info.hh"
 #include "comm_module.hh"
 #include "util/base_concepts.hh"
 #include "widgets/vcv_module_creator.hh"
