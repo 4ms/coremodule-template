@@ -6,7 +6,7 @@
   "brand": "MyPlugin",
   "modules": [
     {
-      "slug": "MYMODULE",
+      "slug": "MyModule",
       "name": "MyModule",
       "description": "Test module",
       "tags": [
