@@ -1,5 +1,5 @@
 #pragma once
-#include "plugin.hh"
+#include "plugin-vcv.hh"
 
 namespace MetaModule
 {

@@ -2,9 +2,12 @@ RACK_DIR ?= ../..
 METAMODULE_SDK_DIR ?= metamodule-plugin-sdk
 
 SOURCES =
-SOURCES += $(wildcard src/modules/vcv/*.cc)
 SOURCES += src/vcv/comm_module.cc
-SOURCES += src/plugin.cc
+SOURCES += src/plugin-vcv.cc
+
+# Nothing is in this dir, but see README for its use
+SOURCES += $(wildcard src/modules/vcv/*.cc)
+SOURCES += $(wildcard src/modules/vcv/*.cpp)
 
 INCLUDES = -Isrc \
 		   -Isrc/modules \

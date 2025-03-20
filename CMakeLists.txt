@@ -21,12 +21,15 @@ project(CoreModule_MetaModulePlugin
 add_library(MyPlugin STATIC)
 
 
-file(GLOB sources src/modules/core/*.cc)
+file(GLOB sources 
+    src/modules/core/*.cc
+    src/modules/core/*.cpp
+)
 
 target_sources(MyPlugin
     PRIVATE
     ${sources}
-    src/mm-plugin.cc
+    src/plugin-mm.cc
 )
 
 target_include_directories(MyPlugin PRIVATE

@@ -66,6 +66,32 @@ To re-configure the MetaModule plugin cmake build:
 make config
 ```
 
+## Adding or editing a module
+
+Each module has two classes: the core class (DSP features) and the info class (GUI features).
+
+The core class is found in src/modules/core/. For example, `src/modules/core/MyModule.hh`.
+
+The info class is found in src/modules/info/, for example `src/modules/info/MyModule_info.hh`.
+
+The info class file is typically generated from an SVG file using the
+svgextract python script (see below). These SVG files live in
+`src/modules/svg/MyModule_info.svg`.
+
+When you add a new module, you'll also need to add it to the init() functions in plugin-vcv.cc and plugin-mm.cc.
+Copy the examples, and make sure to `#include` the core .hh file.
+
+The final place you need to edit to add a new module is in plugin.json and plugin-mm.json.
+
+In summary, here are all the places where a new module needs to be added:
+- Create `src/modules/core/NewModule.cc` to define your module's core
+- Create `src/modules/svg/NewModule_info.svg` to define how the module looks
+- Run svgextract script to generate `src/modules/info/NewModule_info.hh`
+- Add an `#include` and `register_module()` to `src/plugin-mm.cc`
+- Add an `#include`, a `GenericModule<...>::create()` and a `p->addModel();` to `src/plugin-vcv.cc`
+- Add an entry to plugin.json
+- Add an entry to plugin-mm.json
+
 
 ## Using a different MetaModule SDK
 
@@ -73,7 +99,7 @@ To use a different version of the SDK, you have some options.
 
 One way is to checkout a different branch in the SDK submodule:
 
-```
+```bash
 cd metamodule-plugin-sdk
 git checkout v2.0-dev                 # For example, to checkout the v2.0-dev branch
 git submodule update --recursive
@@ -82,13 +108,13 @@ cd ..
 
 Another option is to use a cmake variable to point to the SDK you want to use on your computer:
 
-```
+```bash
 make config METAMODULE_SDK_DIR=/full/path/to/metamodule-plugin-sdk
 ```
 
 You can also specify where the .mmplugin file goes like this:
 
-```
+```bash
 make config METAMODULE_SDK_DIR=/path/SDK-v2/metamodule-plugin-sdk INSTALL_DIR=metamodule-plugins-v2
 make mm
 
@@ -99,7 +125,7 @@ make mm
 Note that the INSTALL_DIR is relative to the build/ dir, so if you did the
 above commands, you'd see the plugins in build/:
 
-```
+```bash
 ls -l build
 
     ...
@@ -145,9 +171,8 @@ and the modulename object is a longer description.
 
 When you have the SVG file, run the svgextract python script on it to create an info file:
 
-```
+```bash
 python3 scripts/svgextract/svgextract.py createinfo src/modules/svg/MyModule_info.svg src/modules/info/
-
 ```
 
 This will create a file named `MyModule_info.hh` in src/modules/info
@@ -159,3 +184,14 @@ The script can't know how you organize these files, so you have to do this manua
 svg_filename is the VCV rack panel artwork. This will be something like `res/panel.svg`. 
 
 png_filename is the MetaModule artwork. This must start with your brand slug, that is, the plugin name (`MyPlugin/panel.svg`).
+
+
+### Generating artwork
+
+Typically just run:
+```bash
+metamodule-plugin-sdk/scripts/SvgToPng.py --input res/ --output assets/
+```
+
+And repeat that command for any subdirs you have in res/ (you need to create the subdir in assets/ as well)
+
