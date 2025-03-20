@@ -17,24 +17,21 @@ DISTRIBUTABLES += $(wildcard LICENSE*) res
 
 MMBUILD_DIR = build
 
-mm: metamodule
+.PHONY: mm config clean-mm
+
+include $(RACK_DIR)/plugin.mk
 
 $(MMBUILD_DIR)/CMakeCache.txt:
 	cmake --fresh -B $(MMBUILD_DIR) -G Ninja -DMETAMODULE_SDK_DIR=$(METAMODULE_SDK_DIR)
 
-config: $(MMBUILD_DIR)/CMakeCache.txt
-		
-metamodule: $(MMBUILD_DIR)/CMakeCache.txt
+config:
+	cmake --fresh -B $(MMBUILD_DIR) -G Ninja -DMETAMODULE_SDK_DIR=$(METAMODULE_SDK_DIR) -DINSTALL_DIR=$(INSTALL_DIR)
+
+
+mm: $(MMBUILD_DIR)/CMakeCache.txt
 	cmake --build $(MMBUILD_DIR)
 	
-
 clean-mm:
 	rm -rf metamodule-plugins
 
-.PHONY: mm metamodule config clean-mm
-
-all: metamodule
-
 clean: clean-mm
-
-include $(RACK_DIR)/plugin.mk
