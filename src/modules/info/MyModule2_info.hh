@@ -10,8 +10,8 @@ struct MyModule2Info : ModuleInfoBase {
 	static constexpr std::string_view slug{"MyModule2"};
 	static constexpr std::string_view description{"My Module Full Name"};
 	static constexpr uint32_t width_hp = 8;
-	static constexpr std::string_view svg_filename{"res/modules/MyModule2.svg"};
-	static constexpr std::string_view png_filename{"4ms/MyModule2.png"};
+	static constexpr std::string_view svg_filename{"res/MyModule2.svg"};
+	static constexpr std::string_view png_filename{"MyPlugin/MyModule2.png"};
 
 	using enum Coords;
 

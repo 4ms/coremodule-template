@@ -152,3 +152,10 @@ python3 scripts/svgextract/svgextract.py createinfo src/modules/svg/MyModule_inf
 
 This will create a file named `MyModule_info.hh` in src/modules/info
 
+
+Open this file and edit the paths to the faceplate files (svg_filename and png_filename).
+The script can't know how you organize these files, so you have to do this manually.
+
+svg_filename is the VCV rack panel artwork. This will be something like `res/panel.svg`. 
+
+png_filename is the MetaModule artwork. This must start with your brand slug, that is, the plugin name (`MyPlugin/panel.svg`).
