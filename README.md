@@ -113,19 +113,25 @@ automatically.
 
 2) Create two "layers" (Illustrator) or "groups" (Inkscape). One is named "components" and the other is named "faceplate".
 
-3) Draw all artwork in the "faceplate" layer. If you use fonts, convert them to outlines.
+3) Draw all artwork in the "faceplate" layer/group. If you use fonts, convert them to outlines.
 
-4) In the components layer, make circles (and sometimes rectangles) with
+4) In the components layer/group, make circles (and sometimes rectangles) with
    certain colors to indicate the location and type of each kind of element.
    Read the file `SPECS.md` found in `scripts/svgextract` for instructions on how to to do that. (TODO: link)
+   Make sure you are not using paths, bezier curves, or polygons. They must be circles.
 
 5. You must have two text objects that are not converted to outlines on the components
-   layer (don't worry, they won't show up on your artwork!):
+   layer.
      - A text object named `slug` with the actual text being the module slug
      - A text object named `modulename` with the actual text being the full, human-friendly name of the module.
 
 If you're using Inkscape, your file should look something like this (XML viewer):
 ![Inkscape XML viewer](docs/inkscape-example.png)
+
+The red arrow in the image above shows an important field: the `id` field will
+be used to refer to this element from your code.
+
+Also note that the SVG objects are circles, not paths or other shapes.
 
 
 6. When you have the SVG file, run the svgextract python script on it to create an info file:
