@@ -8,7 +8,7 @@ using namespace MetaModule;
 
 rack::Plugin *pluginInstance;
 
-__attribute__((__visibility__("default"))) void init(rack::Plugin *p) {
+void init(rack::Plugin *p) {
 	pluginInstance = p;
 
 	rack::Model *modelMyModule = GenericModule<MyModuleInfo, MyModule>::create();
