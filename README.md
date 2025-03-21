@@ -124,6 +124,10 @@ automatically.
      - A text object named `slug` with the actual text being the module slug
      - A text object named `modulename` with the actual text being the full, human-friendly name of the module.
 
+If you're using Inkscape, your file should look something like this (XML viewer):
+![Inkscape XML viewer](docs/inkscape-example.png)
+
+
 6. When you have the SVG file, run the svgextract python script on it to create an info file:
 
 ```bash
