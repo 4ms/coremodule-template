@@ -131,6 +131,10 @@ If you're using Inkscape, your file should look something like this (XML viewer)
 The red arrow in the image above shows an important field: the `id` field will
 be used to refer to this element from your code.
 
+Verify your slug and modulename objects are like this:
+![Inkscape Slug](docs/inkscape-slug.png)
+
+
 Also note that the SVG objects are circles, not paths or other shapes.
 
 
